@@ -9,7 +9,7 @@ on:
       - '.gitignore'
 
 env:
-  DOCKER_IMAGE: uwhackweek/template
+  DOCKER_IMAGE: "uwgda/uwgda-image-2022"
 
 jobs:
   build-image-and-push:
@@ -30,21 +30,8 @@ jobs:
         IMAGE_NAME: ${{ env.DOCKER_IMAGE }}
         ADDITIONAL_TAG: ${{ steps.calver.outputs.version }}
 
-    - name: Also Push To quay.io
-      id: push-to-quay
-      uses: redhat-actions/push-to-registry@v2
-      with:
-        image: ${{ env.DOCKER_IMAGE }}
-        tags: ${{ steps.calver.outputs.version }}
-        registry: quay.io
-        username: ${{ secrets.QUAY_USERNAME }}
-        password: ${{ secrets.QUAY_PASSWORD }}
-
-    - name: Print image url
-      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
-
     - name: Report Image Size and Conda Packages
       if: always()
       run: |
         docker images
-        docker run uwhackweek/template:latest conda list --export
+        docker run ${{env.DOCKER_IMAGE}}:latest conda list --export
