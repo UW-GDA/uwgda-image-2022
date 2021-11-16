@@ -1,9 +1,56 @@
-name: hackweek
+name: uwgda2022
 channels:
   - conda-forge
 dependencies:
+  - bokeh
+  - cartopy
+  - contextily
+  - dask
+  - dask-labextension
+  - datashader
+  - descartes
+  - distributed
+  - fiona
+  - folium
+  - fsspec
+  - gcsfs
+  - gdal
+  - geojson
+  - geopandas
+  - geoviews
+  - h5py
+  - holoviews
+  - hvplot
+  - intake
+  - intake-xarray
+  - intake-stac
   - ipyleaflet
-  - jupyter-book=0.10
+  - ipympl
+  - ipywidgets
+  - jupyterhub-singleuser 
+  - jupyter-server-proxy
   - jupyterlab=3
-  - jupyter-resource-usage
-  - sphinxcontrib-bibtex=2
+  - matplotlib-base
+  - matplotlib-scalebar
+  - nbgitpuller
+  - numpy
+  - pandas
+  - panel
+  - parallel
+  - pillow
+  - pip
+  - pyproj
+  - python=3.9
+  - rasterio
+  - rasterstats
+  - rio-cogeo
+  - rioxarray
+  - requests
+  - s3fs
+  - scikit-learn
+  - scikit-image
+  - scipy
+  - seaborn
+  - shapely
+  - xarray-spatial
+  - zarr
