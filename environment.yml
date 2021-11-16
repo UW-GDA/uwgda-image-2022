@@ -1,0 +1,9 @@
+name: hackweek
+channels:
+  - conda-forge
+dependencies:
+  - ipyleaflet
+  - jupyter-book=0.10
+  - jupyterlab=3
+  - jupyter-resource-usage
+  - sphinxcontrib-bibtex=2

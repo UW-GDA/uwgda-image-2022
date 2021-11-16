@@ -1,0 +1,37 @@
+name: BuildAndTest
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+      - '.gitignore'
+
+env:
+  DOCKER_IMAGE: uwhackweek/template
+
+jobs:
+  build-image-without-pushing:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout PR
+      uses: actions/checkout@v2
+
+    - name: Build Only
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        NO_PUSH: 'true'
+        IMAGE_NAME: ${{ env.DOCKER_IMAGE }}
+
+    - name: Report Image Size and Conda Packages
+      run: |
+        docker images
+        docker run ${{ env.DOCKER_IMAGE }}:latest conda list --export
+        docker run ${{ env.DOCKER_IMAGE }}:latest conda list --explicit > conda-linux-64.lock
+
+    - name: Save package list
+      uses: actions/upload-artifact@v2
+      with:
+        name: lockfile
+        path: conda-linux-64.lock
