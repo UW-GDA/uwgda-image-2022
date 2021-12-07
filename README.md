@@ -7,3 +7,10 @@ This repository builds a [JupyterHub](https://jupyter.org/hub) environment with 
 Launch [Geospatial Data Analysis 2021 Content](https://github.com/UW-GDA/gda_course_2021) via MyBinder.org:
 
 [![BinderHub](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UW-GDA/uwgda-image-2022/main?urlpath=git-pull?repo=https://github.com/UW-GDA/gda_course_2021%26amp%3Bbranch=master%26amp%3Burlpath=lab)
+
+
+Run locally with Docker:
+
+```
+docker pull uwgda/uwgda-image-2022:latest
+```
