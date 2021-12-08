@@ -1,0 +1,35 @@
+name: Rebuild
+on:
+  workflow_dispatch:
+    branches:
+      - main
+    paths-ignore:
+      - 'LICENSE'
+      - 'README.md'
+      - '.gitignore'
+
+jobs:
+  trigger-build:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Get CalenderVersion UTC Date
+      id: calver
+      run: echo "::set-output name=version::$(date +'%Y.%m.%d')"
+
+    # This file will be overwritten in Pull Request CI Workflow
+    - name: Update lockfile
+      run: |
+        sed -i "1s/.*/#REBUILD/" conda-linux-64.lock
+
+    # https://github.com/peter-evans/create-pull-request/blob/main/docs/concepts-guidelines.md#triggering-further-workflow-runs
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        title: Rebuild and lock environment (${{ steps.calver.outputs.version }})
+        commit-message: "Rebuild ${{ steps.calver.outputs.version }}"
+        body: |
+          Manually triggered by ./github/workflows/Rebuild.yml
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
