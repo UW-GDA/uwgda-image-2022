@@ -35,3 +35,10 @@ jobs:
       with:
         name: lockfile
         path: conda-linux-64.lock
+
+    - name: Commit lockfile
+      uses: EndBug/add-and-commit@v7
+      with:
+        default_author: github_actions
+        message: "add conda-lock package list"
+        add: conda-linux-64.lock
