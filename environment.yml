@@ -22,8 +22,6 @@ dependencies:
   - holoviews
   - hvplot
   - intake
-  - intake-xarray
-  - intake-stac
   - ipyleaflet
   - ipympl
   - ipywidgets
