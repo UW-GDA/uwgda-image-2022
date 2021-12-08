@@ -30,6 +30,16 @@ jobs:
         IMAGE_NAME: ${{ env.DOCKER_IMAGE }}
         ADDITIONAL_TAG: ${{ steps.calver.outputs.version }}
 
+    - name: Also Push To quay.io
+      id: push-to-quay
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ env.DOCKER_IMAGE }}
+        tags: ${{ steps.calver.outputs.version }}
+        registry: quay.io
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+
     - name: Report Image Size and Conda Packages
       if: always()
       run: |
